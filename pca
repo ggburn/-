@@ -1,0 +1,6 @@
+library(vegan)#加载vegan程序包
+pca <- read_excel("C:/Users/colourman/Desktop/pca.xlsx")
+View(pca)
+myrda<-rda(pca,scale=TRUE)#进行pca分析
+summary(myrda)#总结
+biplot(myrda)#画图
