@@ -1,0 +1,26 @@
+#以蔗糖酶为例，分组条形图
+mydata<-data.frame(group<-factor(gl(3,1,12),
+                    labels = c("0~10cm","0~20cm","0~30cm")),
+                   inv<-c(0.29,0.05,0.02,0.50,0.40,0.37,0.18,0.02,0.01,0.92,0.97,0.71),
+                   trees<-(factor(gl(4,3),labels = c("z","h","m","f"))),
+                   se<-c(0.02,0.03,0.01,0.05,0.08,0.07,0.05,0.02,0.01,0.01,0.02,0.03))
+cnames<-c("土层","INV","林分","se")
+colnames(mydata)<-cnames
+library(ggplot2)
+library(ggthemes)
+p1<-ggplot(data=mydata,aes(x=林分,y=INV,fill=土层))+
+  geom_bar(stat = "identity", position = "dodge")+
+  geom_errorbar(aes(ymax=INV+se,ymin=INV-se),width=.15,position=position_dodge(.9))+
+  theme_classic()+theme(legend.position = c(0.1,0.82),legend.key.size = unit(0.4, "cm"))+
+  labs(x="林型",y="INV(24h...)",title="蔗糖酶")+
+  scale_fill_brewer()
+print(p1)
+
+#不分组条形图
+z <- read.delim("C:/Users/colourman/Desktop/z.txt", comment.char="#")
+library("ggplot2")
+ggplot(z,aes(x=t,y=mean,colour=f,group=f))+
+geom_line()+
+geom_point()+
+geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.05)+
+theme_few()
