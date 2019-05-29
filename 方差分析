@@ -1,0 +1,16 @@
+#先导入数据z
+z <- read.delim("C:/Users/colourman/Desktop/z.txt", header=FALSE, comment.char="#")
+zz<-as.matrix(z)
+zz<-t(zz)
+zz<-as.vector(zz)
+zz#数据的基本处理,转化为向量格式
+f<-f<-factor(gl(3,9))
+f<-factor(c(rep(1,27),rep(2,27),rep(3,18),rep(4,27)))#7，8二选一设置因素
+shapiro.test(zz[f==1])
+shapiro.test(zz[f==2])
+shapiro.test(zz[f==3])#对因素1，2，3进行正态检验
+bartlett.test(zz~f)#对数据进行方差齐次性检验
+library(pgirmess)
+boxplot(zz~f)#箱线图可视化
+kruskalmc(zz~f, data=z, probs=0.05)#方差不齐，不正态用非参数
+TukeyHSD(aov(zz~f))#方差分析并用tukeyhsd法多重比较
