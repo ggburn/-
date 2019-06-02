@@ -3,4 +3,4 @@ pca <- read_excel("C:/Users/colourman/Desktop/pca.xlsx")
 View(pca)
 myrda<-rda(pca,scale=TRUE)#进行pca分析
 summary(myrda)#总结
-biplot(myrda)#画图
+biplot(myrda,display="sp")#画图
