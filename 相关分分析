@@ -1,0 +1,3 @@
+载入数据z
+library("Hmisc")
+rcorr(z)
